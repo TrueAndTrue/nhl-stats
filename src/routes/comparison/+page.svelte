@@ -8,6 +8,8 @@
   import { ChevronDownSolid } from 'flowbite-svelte-icons';
 	import avatarEmpty from '$lib/images/avatar-empty.png';
 
+	console.log("PAGE DATA", data);
+
 	if (data) {
 		console.log(data, "GOT DATA");
 	}
