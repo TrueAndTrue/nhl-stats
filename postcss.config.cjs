@@ -1,5 +1,5 @@
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
+const tailwindcss = await import('tailwindcss');
+const autoprefixer = await import('autoprefixer');
 
 const config = {
 	plugins: [
