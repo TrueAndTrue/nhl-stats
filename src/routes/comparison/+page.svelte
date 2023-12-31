@@ -1,40 +1,93 @@
-<script context="module" lang="ts">
-	 /** @type {import('./$types').PageData} */
-	export let data: any;
-</script>
-
 <script lang="ts">
-	import { Input, ButtonGroup, Button, Dropdown, DropdownItem } from 'flowbite-svelte';
-  import { ChevronDownSolid } from 'flowbite-svelte-icons';
+	import { Input, ButtonGroup, Button, Dropdown, DropdownItem, P } from 'flowbite-svelte';
 	import avatarEmpty from '$lib/images/avatar-empty.png';
+	import { stringify } from 'postcss';
+	
+	let player1 = {} as any;
+	let player1Input = "";
+	let player1List = [] as any[];
+	let player1Image = avatarEmpty;
 
-	console.log("PAGE DATA", data);
+	let player2 = {} as any;
+	let player2Input = "";
+	let player2List = [] as any[];
+	let player2Image = avatarEmpty;
 
-	if (data) {
-		console.log(data, "GOT DATA");
+	let player1Stats = {}	as any;
+	let player2Stats = {} as any;
+
+	const handlePlayerLookup = async (name: string, playerNum: number) => {
+		if (playerNum === 1) {
+			const response = await fetch(`http://127.0.0.1:8000/players/find-players-by-name/?name=${name}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				credentials: 'include'
+			});
+			console.log(response);
+			const data = await response.json();
+			console.log(data);
+			player1List = data.players.slice(0, 5);
+			console.log(player1List);
+		} 
+		else if (playerNum === 2) {
+			const response = await fetch(`http://127.0.0.1:8000/players/find-players-by-name/?name=${name}`);
+			console.log(response);
+			const data = await response.json();
+			console.log(data);
+			player2List = data.players.slice(0, 5);
+			console.log(player2List);
+		} 
+		else {
+			throw new Error("Invalid player number");
+		}
+	}	
+
+	const handlePlayerSelect = (player: any, playerNum: number) => {
+		if (playerNum === 1) {
+			player1 = player;
+			player1Input = "";
+			player1List = [];
+			player1Image = player.headshot;
+		} 
+		else if (playerNum === 2) {
+			player2 = player;
+			player2Input = "";
+			player2List = [];
+			player2Image = player.headshot;
+		} 
+		else {
+			throw new Error("Invalid player number");
+		}
 	}
 
-	const stats = [
-    { value: "hit", label: "Hit" },
-    { value: "faceoff", label: "Faceoff" },
-    { value: "shot", label: "Shot" },
-    { value: "penalty", label: "Penalty" },
-    { value: "missed_shot", label: "Missed Shot" },
-		{ value: "blocked_shot", label: "Blocked Shot" },
-		{ value: "giveaway", label: "Giveaway" }
-  ];
+	const statMapping: Record<string, string> = {
+		"blocked_shots": "Blocked Shots",
+		"missed_shots": "Missed Shots",
+		"shots": "Shots",
+		"penalties"	: "Penalties",
+		"penalties_drawn": "Penalties Drawn",
+		"hits": "Hits",
+		"hittees": "Been Hit",
+		"faceoff_wins": "Faceoff Wins",
+		"faceoff_losses": "Faceoff Losses",
+		"giveaways": "Giveaways",
+		"goal_count": "Goals",
+		"most_common_period": "Best Scoring Period",
+		"most_common_shot_type": "Most Common Goal",
+	}
 
-	const positions = [
-		{ value: "C", label: "Center" },
-		{ value: "LW", label: "Left Wing" },
-		{ value: "RW", label: "Right Wing" },
-		{ value: "D", label: "Defense" },
-		{ value: "G", label: "Goalie" }
-	]
-
-	let chosenStat = "Shot";
-	let chosenPosition1 = "Choose position";
-	let chosenPosition2 = "Choose position";
+	const handleSendQuery = async () => {
+		if (player1 && player2) {
+			console.log(`http://127.0.0.1:8000/players/player-comparison?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`)
+			const response = await fetch(`http://127.0.0.1:8000/players/player-comparison?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`);
+			const data = await response.json();
+			console.log(data);
+			player1Stats = data.player1;
+			player2Stats = data.player2;
+		}
+	}
 
 
 </script>
@@ -50,58 +103,113 @@
 	</div>
 	<div class="sub-container">
 		<div class="left-sub-container">
-			<div>
-				<h2>Player 1</h2>
-				<img src={avatarEmpty} alt="avatar 1" />
+			<div class="">
+				<h2 class="text-center">{#if Object.keys(player1).length > 0}
+					{player1.first_name} {player1.last_name}
+				{:else}
+					Player 1
+				{/if}
+				</h2>
+				<img class="border-2 border-black bg-white rounded-lg" src={player1Image} alt="avatar 1" />
 				<div>
 					<ButtonGroup class="w-full flex flex-col">
-						<Button color="none" class="w-full flex-shrink-0 text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white hover:bg-gray-200 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-							{chosenPosition1}<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" />
-						</Button>
+						<Input class="mt-2" placeholder="Find Player" bind:value={player1Input} on:input={() => handlePlayerLookup(player1Input, 1)}/>
 						<Dropdown>
-							{#each positions as position}
-								<DropdownItem value={position.value} on:click={() => chosenPosition1 = position.label}>{position.label}</DropdownItem>
-							{/each}
+							{#if player1List.length > 0}
+								{#each player1List as player}
+									<DropdownItem value={player.id} on:click={() => handlePlayerSelect(player, 1)}>{player.first_name} {player.last_name}</DropdownItem>
+								{/each}
+							{/if}
 						</Dropdown>
-						<Input placeholder="Find Player" />
 					</ButtonGroup>
+					{#if Object.keys(player1).length > 0}
+						<div class="flex flex-col align-center justify-center">
+							<div class="flex align-center justify-center">
+								{player1.height_in_cm} cm
+							</div>
+							<div class="flex align-center justify-center">
+								{player1.weight_in_lbs} lbs
+							</div>
+							<div class="flex align-center justify-center">
+								{player1.primary_position}
+							</div>
+						</div>
+					{/if}
 				</div>
 			</div>
 		</div>
 		<div class="middle-sub-container">
-			<div class="flex justify-center align-center">
-				<ButtonGroup class="w-full">
-					<Button color="none" class="min-w-60 flex-shrink-0 text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white hover:bg-gray-200 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-						{chosenStat}<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" />
-					</Button>
-					<Dropdown>
-						{#each stats as stat}
-							<DropdownItem value={stat.value} on:click={() => chosenStat = stat.label}>{stat.label}</DropdownItem>
-						{/each}
-					</Dropdown>
-				</ButtonGroup>
+			<div class="player1-info">
+				Player 1
+				{#if Object.keys(player1Stats).length > 0}
+					{#each Object.keys(player1Stats) as stat}
+						<div class="mt-4">
+							{player1Stats[stat] ?? "N/A"}
+						</div>
+					{/each}
+				{/if}
 			</div>
-			<div>
-				<Button color="red">
-					Send query
-				</Button>
+			<div class="stat-info">
+				Stat info
+				{#if Object.keys(player1Stats).length > 0 || Object.keys(player2Stats).length > 0}
+					{#each Object.keys(player1Stats) as stat}
+						<div class="mt-4">
+							{statMapping[stat] ?? stat}
+						</div>
+					{/each}
+				{/if}
+			</div>
+			<div class="player2-info">
+				Player 2
+				{#if Object.keys(player2Stats).length > 0}
+					{#each Object.keys(player2Stats) as stat}
+						<div class="mt-4">
+							{player2Stats[stat] ?? "N/A"}
+						</div>
+					{/each}
+				{/if}
 			</div>
 		</div>
 		<div class="right-sub-container">
 			<div>
-				<h2>Player 2</h2>
-				<img src={avatarEmpty} alt="avatar 2">
+				<h2 class="text-center">{#if Object.keys(player2).length > 0}
+					{player2.first_name} {player2.last_name}
+				{:else}
+					Player 2
+				{/if}</h2>
+				<img class="border-2 border-black bg-white rounded-lg" src={player2Image} alt="avatar 2">
 				<ButtonGroup class="w-full flex flex-col">
-					<Button color="none" class="w-full flex-shrink-0 text-gray-900 bg-gray-100 border border-gray-300 dark:border-gray-700 dark:text-white hover:bg-gray-200 focus:ring-gray-300 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-						{chosenPosition2}<ChevronDownSolid class="w-3 h-3 ms-2 text-white dark:text-white" />
-					</Button>
+					<Input class="mt-2" placeholder="Find Player" bind:value={player2Input} on:input={() => handlePlayerLookup(player2Input, 2)}/>
 					<Dropdown>
-						{#each positions as position}
-								<DropdownItem value={position.value} on:click={() => chosenPosition2 = position.label}>{position.label}</DropdownItem>
-						{/each}
+						{#if player2List.length > 0}
+							{#each player2List as player}
+								<DropdownItem value={player.id} on:click={() => handlePlayerSelect(player, 2)}>{player.first_name} {player.last_name}</DropdownItem>
+							{/each}
+						{/if}
 					</Dropdown>
-					<Input placeholder="Find Player" />
 				</ButtonGroup>
+				{#if Object.keys(player2).length > 0}
+						<div class="flex flex-col align-center justify-center">
+							<div class="flex align-center justify-center">
+								{player2.height_in_cm} cm
+							</div>
+							<div class="flex align-center justify-center">
+								{player2.weight_in_lbs} lbs
+							</div>
+							<div class="flex align-center justify-center">
+								{player2.primary_position}
+							</div>
+						</div>
+					{/if}
+			</div>
+		</div>
+	</div>
+	<div>
+		<div class="middle-sub-container2">
+			<div>
+				<Button color="red" on:click={() => handleSendQuery()}>
+					Send query
+				</Button>
 			</div>
 		</div>
 	</div>
@@ -116,9 +224,10 @@
 	.container {
 		display: flex;
 		flex-direction: column;
-		background-color: aliceblue;
-		height: 100%;
+		background-color: bisque;
+		height: 75vh;
 		width: 100%;
+		border-radius: 10px;
 	}
 
 	.sub-container {
@@ -127,28 +236,59 @@
 		padding: 1.5rem;
 	}
 
+	.player1-info {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		justify-content: flex-start;
+		flex: 1;
+		text-align: center;
+	}
+
+	.player2-info {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		justify-content: flex-start;
+		flex: 1;
+		text-align: center;
+	}
+
+	.stat-info {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		justify-content: flex-start;
+		flex: 1;
+		text-align: center;
+	}
+
 	.left-sub-container {
 		flex: 1;
 		background-color: bisque;
-		border: 1px solid red;
 	}
 
 	.middle-sub-container {
 		display: flex;
+		justify-content: space-around;
+		align-items: flex-start;
+		flex: 2;
+		background-color: bisque;
+	}
+
+	.middle-sub-container2 {
+		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 		align-items: center;
-		flex: 3;
+		flex: 2;
 		background-color: bisque;
-		border: 1px solid red;
 	}
 
 	.right-sub-container {
 		display: flex;
 		flex: 1;
-		align-items: center;
 		justify-content: flex-end;
 		background-color: bisque;
-		border: 1px solid red;
 	}
 </style>
