@@ -2,10 +2,10 @@
 	import { Input, Button, Dropdown, DropdownItem, ButtonGroup, Spinner } from 'flowbite-svelte';
 	import avatarEmpty from '$lib/images/avatar-empty.png';
 	let apiBaseUrl = "" as any;
-	const ENV = process.env.NODE_ENV;
-	ENV == 'dev' ? apiBaseUrl = "localhost:8080" : apiBaseUrl = process.env.NHL_API_BASE_URL;
-	const apiFindPlayersByName = process.env.NHL_API_FIND_PLAYERS_BY_NAME_URL;
-	const apiPlayerComparison = process.env.NHL_API_PLAYER_COMPARISON_URL;
+	apiBaseUrl = import.meta.env.VITE_NHL_API_BASE_URL;
+	ENV == 'dev' ? apiBaseUrl = "http://127.0.0.1:8000" : apiBaseUrl = import.meta.env.VITE_NHL_API_BASE_URL;
+	const apiFindPlayersByName = import.meta.env.VITE_NHL_API_FIND_PLAYERS_BY_NAME_URL;
+	const apiPlayerComparison = import.meta.env.VITE_NHL_API_PLAYER_COMPARISON_URL;
 
 	let playerTypes = 0;    // 1 = skater, 2 = goalie
 
