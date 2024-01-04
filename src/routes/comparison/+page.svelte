@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { Input, Button, Dropdown, DropdownItem, ButtonGroup, Spinner } from 'flowbite-svelte';
 	import avatarEmpty from '$lib/images/avatar-empty.png';
+	let apiBaseUrl = "";
+	const ENV = import.meta.env.NODE_ENV;
+	ENV == 'dev' ? apiBaseUrl = "localhost:8080" : apiBaseUrl = import.meta.env.NHL_API_BASE_URL;
+	const apiFindPlayersByName = import.meta.env.NHL_API_FIND_PLAYERS_BY_NAME;
+	const apiPlayerComparison = import.meta.env.NHL_API_PLAYER_COMPARISON;
 
 	let playerTypes = 0;    // 1 = skater, 2 = goalie
 
@@ -22,7 +27,7 @@
 
 	const handlePlayerLookup = async (name: string, playerNum: number) => {
 		if (playerNum === 1) {
-			const response = await fetch(`http://127.0.0.1:8000/players/find-players-by-name/?name=${name}`, {
+			const response = await fetch(`${apiBaseUrl}${apiFindPlayersByName}?name=${name}`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json'
@@ -32,7 +37,7 @@
 			const data = await response.json();
 			player1List = data.players.slice(0, 5);
 		} else if (playerNum === 2) {
-			const response = await fetch(`http://127.0.0.1:8000/players/find-players-by-name/?name=${name}`);
+			const response = await fetch(`${apiBaseUrl}${apiFindPlayersByName}?name=${name}`);
 			const data = await response.json();
 			player2List = data.players.slice(0, 5);
 		} else {
@@ -95,7 +100,7 @@
 		player2Stats = {};
 		if (player1 && player2) {
 			isLoading = true;
-			const response = await fetch(`http://127.0.0.1:8000/players/player-comparison?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`);
+			const response = await fetch(`${apiBaseUrl}${apiPlayerComparison}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`);
 			const data = await response.json();
 			isLoading = false;
 			player1Stats = data.player1;
