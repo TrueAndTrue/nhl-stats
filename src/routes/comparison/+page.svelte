@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { Input, Button, Dropdown, DropdownItem, ButtonGroup, Spinner } from 'flowbite-svelte';
 	import avatarEmpty from '$lib/images/avatar-empty.png';
-	let apiBaseUrl = "";
-	const ENV = import.meta.env.NODE_ENV;
-	ENV == 'dev' ? apiBaseUrl = "localhost:8080" : apiBaseUrl = import.meta.env.NHL_API_BASE_URL;
-	const apiFindPlayersByName = import.meta.env.NHL_API_FIND_PLAYERS_BY_NAME;
-	const apiPlayerComparison = import.meta.env.NHL_API_PLAYER_COMPARISON;
+	let apiBaseUrl = "" as any;
+	const ENV = process.env.NODE_ENV;
+	ENV == 'dev' ? apiBaseUrl = "localhost:8080" : apiBaseUrl = process.env.NHL_API_BASE_URL;
+	const apiFindPlayersByName = process.env.NHL_API_FIND_PLAYERS_BY_NAME;
+	const apiPlayerComparison = process.env.NHL_API_PLAYER_COMPARISON;
 
 	let playerTypes = 0;    // 1 = skater, 2 = goalie
 
