@@ -4,8 +4,8 @@
 	let apiBaseUrl = "" as any;
 	const ENV = process.env.NODE_ENV;
 	ENV == 'dev' ? apiBaseUrl = "localhost:8080" : apiBaseUrl = process.env.NHL_API_BASE_URL;
-	const apiFindPlayersByName = process.env.NHL_API_FIND_PLAYERS_BY_NAME;
-	const apiPlayerComparison = process.env.NHL_API_PLAYER_COMPARISON;
+	const apiFindPlayersByName = process.env.NHL_API_FIND_PLAYERS_BY_NAME_URL;
+	const apiPlayerComparison = process.env.NHL_API_PLAYER_COMPARISON_URL;
 
 	let playerTypes = 0;    // 1 = skater, 2 = goalie
 
