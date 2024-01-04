@@ -9,7 +9,7 @@
 
 	let playerTypes = 0;    // 1 = skater, 2 = goalie
 
-	let invalidChoice = true;
+	let invalidChoice = false;
 	let player1 = {} as any;
 	let player1Input = "";
 	let player1List = [] as any[];
