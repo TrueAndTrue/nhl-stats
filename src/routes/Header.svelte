@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import nhlLogo from '$lib/images/nhl-shield.png';
-	import github from '$lib/images/github.svg';
+	import github from '$lib/images/gh.png';
 </script>
 
 <header>
@@ -19,8 +19,11 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}>
-				<a href="/comparison">Comparison Tool</a>
+			<li class="border-grey border-l-2" aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}>
+				<a class="text-center" href="/comparison">Comparison<br> Tool</a>
+			</li>
+			<li class="border-grey border-l-2" aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}>
+				<a class="text-center" href="/comparison">Versus<br> Tool</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -29,7 +32,7 @@
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
+		<a href="https://github.com/TrueAndTrue/nhl-stats">
 			<img src={github} alt="GitHub" />
 		</a>
 	</div>
@@ -39,6 +42,7 @@
 	header {
 		display: flex;
 		justify-content: space-between;
+		background-color: black;
 	}
 
 	.corner {
@@ -63,7 +67,7 @@
 	nav {
 		display: flex;
 		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+		--background: white;
 	}
 
 	svg {

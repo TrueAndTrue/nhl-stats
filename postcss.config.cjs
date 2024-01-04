@@ -1,5 +1,6 @@
-const tailwindcss = await import('tailwindcss');
-const autoprefixer = await import('autoprefixer');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const tailwindcss = require('tailwindcss');
+const autoprefixer = require('autoprefixer');
 
 const config = {
 	plugins: [
