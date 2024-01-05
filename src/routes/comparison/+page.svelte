@@ -153,7 +153,7 @@
             Player 1
           {/if}
         </h2>
-        <div class="w-[12vw] h-[20vh]">
+        <div class="w-[12vw] h-[23vh]">
           <img
 						class="object-cover w-full h-full"
             src={player1Image}
@@ -242,7 +242,7 @@
 						Player 2
 					{/if}
 				</h2>
-				<div class="w-[12vw] h-[20vh]">
+				<div class="w-[12vw] h-[23vh]">
 					<img
 						class="object-cover w-full h-full"
 						src={player2Image}
