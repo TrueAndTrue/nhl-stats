@@ -19,11 +19,17 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
-			<li class="border-grey border-l-2" aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}>
-				<a class="text-center" href="/comparison">Comparison<br> Tool</a>
+			<li
+				class="border-grey border-l-2"
+				aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}
+			>
+				<a class="text-center" href="/comparison">Comparison<br /> Tool</a>
 			</li>
-			<li class="border-grey border-l-2" aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}>
-				<a class="text-center" href="/comparison">Versus<br> Tool</a>
+			<li
+				class="border-grey border-l-2"
+				aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}
+			>
+				<a class="text-center" href="/comparison">Versus<br /> Tool</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
@@ -39,6 +45,10 @@
 </header>
 
 <style>
+	* {
+		color: black;
+	}
+
 	header {
 		display: flex;
 		justify-content: space-between;

@@ -1,95 +1,151 @@
-<script>
-  export let title = 'Advanced NHL Stats';
-
-  const sections = [
-    {
-      heading: 'About',
-      content: 'A web app for comparing NHL players. Report any bugs on the GitHub repo linked at the top right.'
-    },
-    {
-      heading: 'Comparison Tool',
-      content: 'This tool is for comparing two players stats from any position and any point in time. Want to compare a player from 1919 to a player in 2023? No problem.'
-    },
-		{
-      heading: 'Versus Tool',
-      content: 'This tool is meant for pitting players against eachother. Want to know how many times Gretzky scored on Roy? This is the tool for you.'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced NHL Stats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+        --main-bg-color: #121212;
+        --accent-color: #ffffff;
+        --secondary-color: #c5c5c5;
+        --header-font: 'Open Sans', sans-serif;
+        --body-font: 'Roboto', sans-serif;
+        --border-color: #333333;
+        --box-shadow-color: rgba(255, 255, 255, 0.1);
+        --text-glow: 0 0 8px rgba(255, 255, 255, 0.8);
+        --hover-effect: 0 20px 30px rgba(0, 0, 0, 0.5);
     }
-  ];
-</script>
 
-<style lang="postcss">
-  body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        transition: all 0.3s ease; /* Add transitions */
+    }
 
-  header {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 2rem;
-    text-align: center;
-    border-radius: 16px;
-  }
+        body {
+            font-family: var(--body-font);
+            background-color: var(--main-bg-color);
+            color: var(--accent-color);
+            line-height: 1.6;
+            min-width: 100%;
+        }
 
-  section {
-    max-width: 800px;
-    margin: 1.5rem auto;
-    padding: 2rem;
-    background-color: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    transition: transform 0.3s ease-in-out;
-  }
+        .home-header {
+            padding: 3rem;
+            text-align: center;
+            background: linear-gradient(to bottom, #232526, #414345);
+            margin-bottom: 2rem;
+            transition: background 0.3s ease;
+        }
 
-  section:hover {
-    transform: scale(1.02);
-  }
+        .home-header:hover {
+          background: linear-gradient(to bottom, #414345, #232526);
+        }
 
-  h1 {
-    color: white;
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
+        h1 {
+            font-family: var(--header-font);
+            font-size: 4rem;
+            color: var(--accent-color);
+            text-shadow: var(--text-glow);
+            transition: text-shadow 0.3s ease;
+        }
 
-  h2 {
-    color: #1a1a1a;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
+        h1:hover {
+          text-shadow: 0 0 3px var(--accent-color), 0 0 6px var(--accent-color), 0 0 9px var(--accent-color), 0 0 12px var(--accent-color);
+        }
 
-  p {
-    color: #555;
-    font-size: 1.2rem;
-    line-height: 1.6;
-  }
+        .sub-header {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-top: 1rem;
+            text-shadow: var(--text-glow);
+            transition: color 0.3s ease;
+        }
 
-	.sub-header {
-		color: white;
-	}
+        .sub-header:hover {
+          color: var(--secondary-color);
+        }
 
-  footer {
-    text-align: center;
-    padding: 2rem;
-    background-color: #1a1a1a;
-    color: white;
-    border-radius: 16px;
-  }
-</style>
+        section {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2.5rem;
+            text-align: center;
+            background-color: #1F1F1F;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--box-shadow-color);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-<header>
-  <h1>{title}</h1>
-  <p class="sub-header">For the nerds 🤓</p>
-</header>
+        section:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--hover-effect);
+        }
 
-{#each sections as { heading, content }}
-  <section class="min-w-full text-center">
-    <h2>{heading}</h2>
-    <p>{content}</p>
-  </section>
-{/each}
+        section h2 {
+            font-family: var(--header-font);
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            text-shadow: var(--text-glow);
+        }
 
-<footer>
-  &copy; {new Date().getFullYear()} {title}. All rights unreserved.
-</footer>
+        p {
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            margin-top: 1rem;
+        }
+
+        .home-footer {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(to top, #232526, #414345);
+            border-top: 5px solid var(--border-color);
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .sub-header, p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="home-header">
+        <h1>Advanced NHL Stats</h1>
+        <p class="sub-header">For the nerds 🤓</p>
+    </header>
+
+    <section>
+        <h2>About</h2>
+        <p>
+            A web app for comparing NHL players. Report any bugs on the GitHub repo linked at the top right.
+        </p>
+    </section>
+
+    <section>
+        <h2>Comparison Tool</h2>
+        <p>
+            This tool is for comparing two players stats from any position and any point in time. Want to compare a player from 1919 to a player in 2023? No problem.
+        </p>
+    </section>
+
+    <section>
+        <h2>Versus Tool</h2>
+        <p>
+            This tool is meant for pitting players against each other. Want to know how many times Gretzky scored on Roy? This is the tool for you.
+        </p>
+    </section>
+
+    <footer class="home-footer">&copy; 2024 Advanced NHL Stats. All rights unreserved.</footer>
+</body>
+</html>
