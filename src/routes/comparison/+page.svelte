@@ -135,7 +135,7 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<div class="mx-auto mt-4 rounded-xl bg-gray-900 p-8 text-white shadow-2xl" style="height: 85vh; width: 70vw;">
+<div class="mx-auto mt-4 rounded-xl p-8 text-white shadow-2xl hover:scale-101" style="background-color: #1a1a1a; height: 85vh; width: 70vw; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
   <div class="relative flex items-center justify-center mb-4">
     <h1 class="text-4xl font-bold text-gray-100">Player Comparison Tool</h1>
     <Button class="absolute right-0 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg shadow-md" on:click={handleReset}>
@@ -144,7 +144,7 @@
   </div>
 
   <div class="flex flex-row p-6 h-5/6">
-    <div class="m-2 flex-1 bg-gray-800 rounded-xl p-4 text-center shadow-md">
+    <div class="m-2 flex-1 bg-gray-800 rounded-xl p-4 text-center shadow-md hover:scale-103" style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
       <div class="text-center">
         <h2 class="text-2xl font-bold text-gray-100 mb-4">
           {#if Object.keys(player1).length > 0}
@@ -194,7 +194,7 @@
 		</div>
 
 		<!-- STATS CONTAINER -->
-    <div class="middle-sub-container flex justify-around align-start m-2 bg-gray-700 rounded-xl shadow-md p-4">
+    <div class="middle-sub-container flex justify-around align-start m-2 bg-gray-700 rounded-xl shadow-md p-4 hover:scale-103" style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
 			<div class="font-medium">
         <p class="font-bold text-lg text-gray-100">Player 1</p>
 				{#if Object.keys(player1Stats).length > 0}
@@ -257,7 +257,7 @@
 		</div>
 
 		<!-- PLAYER 2 CONTAINER -->
-    <div class="flex-1 m-2 bg-gray-800 rounded-xl shadow-md p-4 text-center">
+    <div class="flex-1 m-2 bg-gray-800 rounded-xl shadow-md p-4 text-center hover:scale-103" style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
 			<div class="text-center">
 				<h2 class="text-2xl text-gray-100 font-bold mb-4">
 					{#if Object.keys(player2).length > 0}
