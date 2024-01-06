@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -49,12 +48,11 @@
             font-family: var(--header-font);
             font-size: 4rem;
             color: var(--accent-color);
-            text-shadow: var(--text-glow);
             transition: text-shadow 0.3s ease;
         }
 
         h1:hover {
-          text-shadow: 0 0 3px var(--accent-color), 0 0 6px var(--accent-color), 0 0 9px var(--accent-color), 0 0 12px var(--accent-color);
+          text-shadow: 0 0 1px var(--accent-color), 0 0 2px var(--accent-color), 0 0 2px var(--accent-color), 0 0 7px var(--accent-color);
         }
 
         .sub-header {

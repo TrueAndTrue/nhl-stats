@@ -135,7 +135,7 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
-<div class="mx-auto mt-4 rounded-xl bg-gray-900 p-8 text-white shadow-2xl" style="height: 85vh; width: 65vw;">
+<div class="mx-auto mt-4 rounded-xl bg-gray-900 p-8 text-white shadow-2xl" style="height: 85vh; width: 70vw;">
   <div class="relative flex items-center justify-center mb-4">
     <h1 class="text-4xl font-bold text-gray-100">Player Comparison Tool</h1>
     <Button class="absolute right-0 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg shadow-md" on:click={handleReset}>
@@ -178,7 +178,7 @@
 					</Dropdown>
 				</ButtonGroup>
 				{#if Object.keys(player1).length > 0}
-					<div class="align-center mt-2 flex flex-col justify-center text-gray-300">
+					<div class="align-center mt-2 flex flex-col font-extrabold justify-center text-gray-300">
 						<div class="flex items-center justify-center">
 							{player1.height_in_cm} cm
 						</div>
@@ -200,8 +200,20 @@
 				{#if Object.keys(player1Stats).length > 0}
 					{#each Object.keys(player1Stats) as stat}
 					<div class="mt-3 text-gray-300">
-						{player1Stats[stat] ?? 'N/A'}
-						</div>
+						{#if !(player1Stats[stat])}
+							N/A
+						{:else}
+							{#if stat !== 'most_common_goal' && stat !== 'most_common_period'}
+								{#if player1Stats[stat] > player2Stats[stat]}
+									<p class="font-extrabold" style="text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);">{player1Stats[stat]}</p>
+								{:else}
+									{player1Stats[stat]}
+								{/if}
+							{:else}
+								{player1Stats[stat]}
+							{/if}
+						{/if}
+					</div>
 					{/each}
 				{/if}
 			</div>
@@ -224,9 +236,21 @@
         <p class="font-bold text-lg text-gray-100">Player 2</p>
 				{#if Object.keys(player2Stats).length > 0}
 					{#each Object.keys(player2Stats) as stat}
-					<div class="mt-3 text-right text-gray-300">
-						{player2Stats[stat] ?? 'N/A'}
-						</div>
+					<div class="mt-3 text-gray-300 text-right">
+						{#if !(player2Stats[stat])}
+							N/A
+						{:else}
+							{#if stat !== 'most_common_goal' && stat !== 'most_common_period'}
+								{#if player2Stats[stat] > player1Stats[stat]}
+									<p class="font-extrabold" style="text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);">{player2Stats[stat]}</p>
+								{:else}
+									{player2Stats[stat]}
+								{/if}
+							{:else}
+								{player2Stats[stat]}
+							{/if}
+						{/if}
+					</div>
 					{/each}
 				{/if}
 			</div>
@@ -267,7 +291,7 @@
 					</Dropdown>
 				</ButtonGroup>
 				{#if Object.keys(player2).length > 0}
-					<div class="align-center mt-2 flex flex-col justify-center text-gray-300">
+					<div class="align-center mt-2 flex flex-col justify-center font-extrabold text-gray-300">
 						<div class="flex items-center justify-center">
 							{player2.height_in_cm} cm
 						</div>
