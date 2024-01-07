@@ -55,6 +55,7 @@
 			return;
 		}
 		if (playerNum === 1) {
+      invalidChoice = '';
 			player1 = player;
 			player1Input = '';
 			player1List = [];
@@ -63,6 +64,7 @@
 				player1.primary_position += 'W';
 			}
 		} else if (playerNum === 2) {
+      invalidChoice = '';
 			player2 = player;
 			player2Input = '';
 			player2List = [];
@@ -100,6 +102,8 @@
 		player2Image = avatarEmpty;
 
 		playerStats = {};
+
+    invalidChoice = '';
 	};
 
 	const handleSendQuery = async () => {
@@ -278,7 +282,7 @@
 	<!-- BUTTON -->
 	<div class="text-center">
 		<Button
-			class="rounded bg-red-500 px-4 py-2 font-bold text-white shadow-lg hover:bg-red-800"
+			class="rounded bg-red-500 px-4 py-2 mt-4 font-bold text-white shadow-lg hover:bg-red-800"
 			on:click={handleSendQuery}
 		>
 			Compare
