@@ -133,7 +133,6 @@
 					: await fetch(
 							`${apiBaseUrl}${apiGoalieComparison}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`
 						);
-			console.log(response);
 			const data = await response.json();
 			isLoading = false;
 			player1Stats = data.player1;

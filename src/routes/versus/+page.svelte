@@ -119,7 +119,6 @@
 							`${apiBaseUrl}${apiPlayerVsGoalie}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`
 						);
 			const data = await response.json();
-			console.log(data);
 			isLoading = false;
 			playerStats = data;
 		}
