@@ -148,7 +148,7 @@
 </svelte:head>
 
 <div
-	class="mx-auto mt-4 rounded-xl p-8 text-white shadow-2xl hover:scale-101"
+	class="mx-auto mt-4 rounded-xl p-8 text-white shadow-2xl"
 	style="background-color: #1a1a1a; height: 85vh; width: 70vw; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);"
 >
 	<div class="relative mb-4 flex items-center justify-center">
@@ -212,7 +212,7 @@
 
 		<!-- STATS CONTAINER -->
 		<div
-			class="middle-sub-container align-start m-2 flex justify-around rounded-xl bg-gray-700 p-4 shadow-md hover:scale-103"
+			class="middle-sub-container align-start m-2 flex justify-around rounded-xl bg-gray-700 p-4 shadow-md"
 			style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);"
 		>
 			<div class="font-medium">
