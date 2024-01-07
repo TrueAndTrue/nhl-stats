@@ -126,21 +126,22 @@
     <section>
         <h2>About</h2>
         <p>
-            A web app for comparing NHL players. Report any bugs on the GitHub repo linked at the top right.
+          A web app for comparing NHL players. Report any bugs on the GitHub repo linked at the top right. <br>
+          *shot numbers may be off due to NHL API issues
         </p>
     </section>
 
     <section>
         <h2>Comparison Tool</h2>
         <p>
-            This tool is for comparing two players stats from any position and any point in time. Want to compare a player from 1919 to a player in 2023? No problem.
+          This tool is for comparing two players stats from any position and any point in time. Want to compare a player from 1919 to a player in 2023? No problem.
         </p>
     </section>
 
     <section>
         <h2>Versus Tool</h2>
         <p>
-            This tool is meant for pitting players against each other. Want to know how many times Gretzky scored on Roy? This is the tool for you.
+          This tool is meant for pitting players against each other. Want to know how many times Gretzky scored on Roy? This is the tool for you.
         </p>
     </section>
 

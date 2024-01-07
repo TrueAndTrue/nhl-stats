@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Input, Button, Dropdown, DropdownItem, DropdownDivider, ButtonGroup, Spinner } from 'flowbite-svelte';
+	import { Input, Button, Dropdown, DropdownItem, ButtonGroup, Spinner } from 'flowbite-svelte';
 	import avatarEmpty from '$lib/images/avatar-empty.png';
 	let apiBaseUrl = '' as any;
 	const ENV = import.meta.env.VITE_NODE_ENV;
@@ -8,6 +8,7 @@
 		: (apiBaseUrl = import.meta.env.VITE_NHL_API_BASE_URL);
 	const apiFindPlayersByName = import.meta.env.VITE_NHL_API_FIND_PLAYERS_BY_NAME_URL;
 	const apiPlayerComparison = import.meta.env.VITE_NHL_API_PLAYER_COMPARISON_URL;
+	const apiGoalieComparison = import.meta.env.VITE_NHL_API_GOALIE_COMPARISON_URL;
 
 	let playerTypes = 0; // 1 = skater, 2 = goalie
 
@@ -92,7 +93,10 @@
 		giveaways: 'Giveaways',
 		goal_count: 'Goals',
 		most_common_period: 'Best Scoring Period',
-		most_common_shot_type: 'Most Common Goal'
+		most_common_shot_type: 'Most Common Goal',
+		goals_allowed: 'Goals Against',
+		shots_against: 'Shots Against',
+		save_percentage: 'Save Percentage',
 	};
 
 	const handleReset = () => {
@@ -108,20 +112,25 @@
 
 		player1Stats = {};
 		player2Stats = {};
+
+		playerTypes = 0;
 	}
 
 	const handleSendQuery = async () => {
 		player1Stats = {};
 		player2Stats = {};
-		if (Object.keys(player1).length <= 0 && Object.keys(player2).length <= 0) {
+		if (Object.keys(player1).length <= 0 || Object.keys(player2).length <= 0) {
 			invalidChoice = "Please select two players";
 			return;
 		}
 		if (player1 && player2) {
 			isLoading = true;
-			const response = await fetch(
+			const response = player1.primary_position !== "G" ? await fetch(
 				`${apiBaseUrl}${apiPlayerComparison}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`
+			) : await fetch(
+				`${apiBaseUrl}${apiGoalieComparison}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`
 			);
+			console.log(response);
 			const data = await response.json();
 			isLoading = false;
 			player1Stats = data.player1;
@@ -131,8 +140,8 @@
 </script>
 
 <svelte:head>
-	<title>About</title>
-	<meta name="description" content="About this app" />
+	<title>Comparison Tool</title>
+	<meta name="description" content="Compare any two players from any time in the NHL." />
 </svelte:head>
 
 <div class="mx-auto mt-4 rounded-xl p-8 text-white shadow-2xl hover:scale-101" style="background-color: #1a1a1a; height: 85vh; width: 70vw; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
@@ -225,7 +234,7 @@
 					</div>
 				{/if}
 				{#if Object.keys(player1Stats).length > 0 || Object.keys(player2Stats).length > 0}
-					{#each Object.keys(player1Stats) as stat}
+					{#each Object.keys(player1Stats) as stat, index}
 					<div class="mt-3 text-gray-300">
 						{statMapping[stat] ?? stat}
 						</div>

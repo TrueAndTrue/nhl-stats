@@ -27,9 +27,9 @@
 			</li>
 			<li
 				class="border-grey border-l-2"
-				aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}
+				aria-current={$page.url.pathname === '/versus' ? 'page' : undefined}
 			>
-				<a class="text-center" href="/comparison">Versus<br /> Tool</a>
+				<a class="text-center" href="/versus">Versus<br /> Tool</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
