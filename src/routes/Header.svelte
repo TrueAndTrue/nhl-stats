@@ -4,137 +4,104 @@
 	import github from '$lib/images/gh.png';
 </script>
 
-<header>
+<header class="header">
 	<div class="corner">
-		<a href="https://nhl.com">
-			<img src={nhlLogo} alt="SvelteKit" />
-		</a>
+			<a href="https://nhl.com" class="logo-link">
+					<img src={nhlLogo} alt="NHL Logo" class="logo" />
+			</a>
 	</div>
 
-	<nav>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
-		<ul>
-			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Home</a>
-			</li>
-			<li
-				class="border-grey border-l-2"
-				aria-current={$page.url.pathname === '/comparison' ? 'page' : undefined}
-			>
-				<a class="text-center" href="/comparison">Comparison<br /> Tool</a>
-			</li>
-			<li
-				class="border-grey border-l-2"
-				aria-current={$page.url.pathname === '/versus' ? 'page' : undefined}
-			>
-				<a class="text-center" href="/versus">Versus<br /> Tool</a>
-			</li>
-		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
-			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
+	<nav class="nav">
+			<ul class="menu">
+					<li class="{($page.url.pathname === '/') ? 'active' : ''}">
+							<a href="/">Home</a>
+					</li>
+					<li class="{($page.url.pathname === '/comparison') ? 'active' : ''}">
+							<a href="/comparison">Comparison Tool</a>
+					</li>
+					<li class="{($page.url.pathname === '/versus') ? 'active' : ''}">
+							<a href="/versus">Versus Tool</a>
+					</li>
+			</ul>
 	</nav>
 
 	<div class="corner">
-		<a href="https://github.com/TrueAndTrue/nhl-stats">
-			<img src={github} alt="GitHub" />
-		</a>
+			<a href="https://github.com/TrueAndTrue/nhl-stats" class="logo-link">
+					<img src={github} alt="GitHub" class="logo" />
+			</a>
 	</div>
 </header>
 
 <style>
-	* {
-		color: black;
+	.header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 1rem;
+			background-color: #1a1a1a; /* Preserving original color */
+			color: #fff;
+			font-family: 'Roboto', sans-serif;
 	}
 
-	header {
-		display: flex;
-		justify-content: space-between;
-		background-color: black;
+	.corner .logo-link {
+			display: block;
+			width: 3em;
+			height: 3em;
+			transition: transform 0.3s ease;
 	}
 
-	.corner {
-		width: 3em;
-		height: 3em;
+	.corner .logo-link:hover .logo {
+			transform: scale(1.1);
 	}
 
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 100%;
+	.nav .menu {
+			list-style: none;
+			display: flex;
+			gap: 1rem;
 	}
 
-	.corner img {
-		width: 2em;
-		height: 2em;
-		object-fit: contain;
+	.nav .menu li a {
+			color: #f0f0f0;
+			text-decoration: none;
+			padding: 0.5rem 1rem;
+			border-radius: 0.5rem;
+			transition: background-color 0.3s ease;
 	}
 
-	nav {
-		display: flex;
-		justify-content: center;
-		--background: white;
+	.nav .menu li a:hover {
+			background-color: rgba(255, 255, 255, 0.1); /* Subtle hover and active background */
 	}
 
-	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
+	.nav .menu li.active a {
+			font-weight: 700;
+			position: relative;
 	}
 
-	path {
-		fill: var(--background);
+	.nav .menu li.active a::after {
+			content: '';
+			position: absolute;
+			bottom: -0.25rem;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background-color: white; /* A bright color for the active indicator */
+			border-radius: 1.5px;
 	}
 
-	ul {
-		position: relative;
-		padding: 0;
-		margin: 0;
-		height: 3em;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		list-style: none;
-		background: var(--background);
-		background-size: contain;
-	}
+	@media (max-width: 600px) {
+			.header {
+					flex-direction: column;
+			}
 
-	li {
-		position: relative;
-		height: 100%;
-	}
+			.nav .menu {
+					flex-direction: column;
+					align-items: center;
+					width: 100%;
+			}
 
-	li[aria-current='page']::before {
-		--size: 6px;
-		content: '';
-		width: 0;
-		height: 0;
-		position: absolute;
-		top: 0;
-		left: calc(50% - var(--size));
-		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
-	}
-
-	nav a {
-		display: flex;
-		height: 100%;
-		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
-		font-weight: 700;
-		font-size: 0.8rem;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		text-decoration: none;
-		transition: color 0.2s linear;
-	}
-
-	a:hover {
-		color: var(--color-theme-1);
+			.nav .menu li a {
+					width: 100%;
+					text-align: center;
+			}
 	}
 </style>
