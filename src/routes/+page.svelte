@@ -158,6 +158,22 @@
 			</p>
 		</section>
 
+    <section>
+			<h2>TODO</h2>
+      Things still left to do:
+      <ul>
+        <li>
+          <del>Fix the player lookup dropdown</del>
+        </li>
+        <li>
+          <h6>Refetch data from NHL API when a more concrete API is found</h6>
+        </li>
+        <li>
+          <h6>Add support for Skater vs Skater on versus tool</h6>
+        </li>
+      </ul>
+		</section>
+
 		<footer class="home-footer">&copy; 2024 Advanced NHL Stats. All rights unreserved.</footer>
 	</body>
 </html>
