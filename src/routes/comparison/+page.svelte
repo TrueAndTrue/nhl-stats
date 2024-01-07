@@ -12,7 +12,7 @@
 
 	let playerTypes = 0; // 1 = skater, 2 = goalie
 
-	let invalidChoice = "";
+	let invalidChoice = '';
 	let player1 = {} as any;
 	let player1Input = '';
 	let player1List = [] as any[];
@@ -50,13 +50,13 @@
 
 	const handlePlayerSelect = (player: any, playerNum: number) => {
 		if (player.primary_position == 'G' && playerTypes == 1) {
-			invalidChoice = "Cannot compare a goalie to a skater";
+			invalidChoice = 'Cannot compare a goalie to a skater';
 			return;
 		} else if (player.primary_position != 'G' && playerTypes == 2) {
-			invalidChoice = "Cannot compare a goalie to a skater";
+			invalidChoice = 'Cannot compare a goalie to a skater';
 			return;
 		} else {
-			invalidChoice = "";
+			invalidChoice = '';
 		}
 		player.primary_position == 'G' ? (playerTypes = 2) : (playerTypes = 1);
 		if (playerNum === 1) {
@@ -96,7 +96,7 @@
 		most_common_shot_type: 'Most Common Goal',
 		goals_allowed: 'Goals Against',
 		shots_against: 'Shots Against',
-		save_percentage: 'Save Percentage',
+		save_percentage: 'Save Percentage'
 	};
 
 	const handleReset = () => {
@@ -114,22 +114,25 @@
 		player2Stats = {};
 
 		playerTypes = 0;
-	}
+	};
 
 	const handleSendQuery = async () => {
 		player1Stats = {};
 		player2Stats = {};
 		if (Object.keys(player1).length <= 0 || Object.keys(player2).length <= 0) {
-			invalidChoice = "Please select two players";
+			invalidChoice = 'Please select two players';
 			return;
 		}
 		if (player1 && player2) {
 			isLoading = true;
-			const response = player1.primary_position !== "G" ? await fetch(
-				`${apiBaseUrl}${apiPlayerComparison}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`
-			) : await fetch(
-				`${apiBaseUrl}${apiGoalieComparison}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`
-			);
+			const response =
+				player1.primary_position !== 'G'
+					? await fetch(
+							`${apiBaseUrl}${apiPlayerComparison}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`
+						)
+					: await fetch(
+							`${apiBaseUrl}${apiGoalieComparison}?player1=${player1.nhl_api_id}&player2=${player2.nhl_api_id}`
+						);
 			console.log(response);
 			const data = await response.json();
 			isLoading = false;
@@ -144,34 +147,39 @@
 	<meta name="description" content="Compare any two players from any time in the NHL." />
 </svelte:head>
 
-<div class="mx-auto mt-4 rounded-xl p-8 text-white shadow-2xl hover:scale-101" style="background-color: #1a1a1a; height: 85vh; width: 70vw; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
-  <div class="relative flex items-center justify-center mb-4">
-    <h1 class="text-4xl font-bold text-gray-100">Player Comparison Tool</h1>
-    <Button class="absolute right-0 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg shadow-md" on:click={handleReset}>
-      Reset
-    </Button>
-  </div>
+<div
+	class="mx-auto mt-4 rounded-xl p-8 text-white shadow-2xl hover:scale-101"
+	style="background-color: #1a1a1a; height: 85vh; width: 70vw; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);"
+>
+	<div class="relative mb-4 flex items-center justify-center">
+		<h1 class="text-4xl font-bold text-gray-100">Player Comparison Tool</h1>
+		<Button
+			class="absolute right-0 rounded-lg bg-red-500 px-4 py-2 font-bold text-white shadow-md hover:bg-red-700"
+			on:click={handleReset}
+		>
+			Reset
+		</Button>
+	</div>
 
-  <div class="flex flex-row p-6 h-5/6">
-    <div class="m-2 flex-1 bg-gray-800 rounded-xl p-4 text-center shadow-md hover:scale-103" style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
-      <div class="text-center">
-        <h2 class="text-2xl font-bold text-gray-100 mb-4">
-          {#if Object.keys(player1).length > 0}
-            {player1.first_name} {player1.last_name}
-          {:else}
-            Player 1
-          {/if}
-        </h2>
-        <div class="w-[12vw] h-[23vh]">
-          <img
-						class="object-cover w-full h-full"
-            src={player1Image}
-            alt="avatar 1"
-          />
-        </div>
+	<div class="flex h-5/6 flex-row p-6">
+		<div
+			class="m-2 flex-1 rounded-xl bg-gray-800 p-4 text-center shadow-md hover:scale-103"
+			style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);"
+		>
+			<div class="text-center">
+				<h2 class="mb-4 text-2xl font-bold text-gray-100">
+					{#if Object.keys(player1).length > 0}
+						{player1.first_name} {player1.last_name}
+					{:else}
+						Player 1
+					{/if}
+				</h2>
+				<div class="h-[23vh] w-[12vw]">
+					<img class="h-full w-full object-cover" src={player1Image} alt="avatar 1" />
+				</div>
 				<ButtonGroup class="flex w-full flex-col">
 					<Input
-						class="mt-2 mb-4 rounded border-gray-300 text-black"
+						class="mb-4 mt-2 rounded border-gray-300 text-black"
 						placeholder="Find Player"
 						bind:value={player1Input}
 						on:input={() => handlePlayerLookup(player1Input, 1)}
@@ -187,7 +195,7 @@
 					</Dropdown>
 				</ButtonGroup>
 				{#if Object.keys(player1).length > 0}
-					<div class="align-center mt-2 flex flex-col font-extrabold justify-center text-gray-300">
+					<div class="align-center mt-2 flex flex-col justify-center font-extrabold text-gray-300">
 						<div class="flex items-center justify-center">
 							{player1.height_in_cm} cm
 						</div>
@@ -203,88 +211,90 @@
 		</div>
 
 		<!-- STATS CONTAINER -->
-    <div class="middle-sub-container flex justify-around align-start m-2 bg-gray-700 rounded-xl shadow-md p-4 hover:scale-103" style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
+		<div
+			class="middle-sub-container align-start m-2 flex justify-around rounded-xl bg-gray-700 p-4 shadow-md hover:scale-103"
+			style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);"
+		>
 			<div class="font-medium">
-        <p class="font-bold text-lg text-gray-100">Player 1</p>
+				<p class="text-lg font-bold text-gray-100">Player 1</p>
 				{#if Object.keys(player1Stats).length > 0}
 					{#each Object.keys(player1Stats) as stat}
-					<div class="mt-3 text-gray-300">
-						{#if !(player1Stats[stat])}
-							N/A
-						{:else}
-							{#if stat !== 'most_common_goal' && stat !== 'most_common_period'}
+						<div class="mt-3 text-gray-300">
+							{#if !player1Stats[stat]}
+								N/A
+							{:else if stat !== 'most_common_goal' && stat !== 'most_common_period'}
 								{#if player1Stats[stat] > player2Stats[stat]}
-									<p class="font-extrabold" style="text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);">{player1Stats[stat]}</p>
+									<p class="font-extrabold" style="text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);">
+										{player1Stats[stat]}
+									</p>
 								{:else}
 									{player1Stats[stat]}
 								{/if}
 							{:else}
 								{player1Stats[stat]}
 							{/if}
-						{/if}
-					</div>
-					{/each}
-				{/if}
-			</div>
-      <div class="stat-info text-center">
-				<p class="font-bold text-lg text-gray-100">Stat info</p>
-				{#if isLoading}
-				<div class="flex justify-center items-center h-full">
-					<Spinner color="gray" class="h-12 w-12" />
-					</div>
-				{/if}
-				{#if Object.keys(player1Stats).length > 0 || Object.keys(player2Stats).length > 0}
-					{#each Object.keys(player1Stats) as stat, index}
-					<div class="mt-3 text-gray-300">
-						{statMapping[stat] ?? stat}
 						</div>
 					{/each}
 				{/if}
 			</div>
-      <div class="font-medium">
-        <p class="font-bold text-lg text-gray-100">Player 2</p>
+			<div class="stat-info text-center">
+				<p class="text-lg font-bold text-gray-100">Stat info</p>
+				{#if isLoading}
+					<div class="flex h-full items-center justify-center">
+						<Spinner color="gray" class="h-12 w-12" />
+					</div>
+				{/if}
+				{#if Object.keys(player1Stats).length > 0 || Object.keys(player2Stats).length > 0}
+					{#each Object.keys(player1Stats) as stat, index}
+						<div class="mt-3 text-gray-300">
+							{statMapping[stat] ?? stat}
+						</div>
+					{/each}
+				{/if}
+			</div>
+			<div class="font-medium">
+				<p class="text-lg font-bold text-gray-100">Player 2</p>
 				{#if Object.keys(player2Stats).length > 0}
 					{#each Object.keys(player2Stats) as stat}
-					<div class="mt-3 text-gray-300 text-right">
-						{#if !(player2Stats[stat])}
-							N/A
-						{:else}
-							{#if stat !== 'most_common_goal' && stat !== 'most_common_period'}
+						<div class="mt-3 text-right text-gray-300">
+							{#if !player2Stats[stat]}
+								N/A
+							{:else if stat !== 'most_common_goal' && stat !== 'most_common_period'}
 								{#if player2Stats[stat] > player1Stats[stat]}
-									<p class="font-extrabold" style="text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);">{player2Stats[stat]}</p>
+									<p class="font-extrabold" style="text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);">
+										{player2Stats[stat]}
+									</p>
 								{:else}
 									{player2Stats[stat]}
 								{/if}
 							{:else}
 								{player2Stats[stat]}
 							{/if}
-						{/if}
-					</div>
+						</div>
 					{/each}
 				{/if}
 			</div>
 		</div>
 
 		<!-- PLAYER 2 CONTAINER -->
-    <div class="flex-1 m-2 bg-gray-800 rounded-xl shadow-md p-4 text-center hover:scale-103" style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);">
+		<div
+			class="m-2 flex-1 rounded-xl bg-gray-800 p-4 text-center shadow-md hover:scale-103"
+			style="background-color: #1a1a1a; box-shadow: 10px 10px 20px #000000, -5px -5px 10px rgba(255, 255, 255, 0.2);"
+		>
 			<div class="text-center">
-				<h2 class="text-2xl text-gray-100 font-bold mb-4">
+				<h2 class="mb-4 text-2xl font-bold text-gray-100">
 					{#if Object.keys(player2).length > 0}
 						{player2.first_name} {player2.last_name}
 					{:else}
 						Player 2
 					{/if}
 				</h2>
-				<div class="w-[12vw] h-[23vh]">
-					<img
-						class="object-cover w-full h-full"
-						src={player2Image}
-						alt="avatar 2"
-					/>
+				<div class="h-[23vh] w-[12vw]">
+					<img class="h-full w-full object-cover" src={player2Image} alt="avatar 2" />
 				</div>
 				<ButtonGroup class="flex w-full flex-col">
 					<Input
-						class="mt-2 mb-4 rounded border-gray-300 text-black"
+						class="mb-4 mt-2 rounded border-gray-300 text-black"
 						placeholder="Find Player"
 						bind:value={player2Input}
 						on:input={() => handlePlayerLookup(player2Input, 2)}
@@ -318,22 +328,24 @@
 
 	<!-- BUTTON -->
 	<div class="text-center">
-    <Button class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded shadow-lg" on:click={handleSendQuery}>
-      Compare
-    </Button>
-    {#if invalidChoice}
-      <p class="text-red-500 mt-2">{invalidChoice}</p>
-    {/if}
-  </div>
+		<Button
+			class="rounded bg-red-500 px-4 py-2 font-bold text-white shadow-lg hover:bg-red-800"
+			on:click={handleSendQuery}
+		>
+			Compare
+		</Button>
+		{#if invalidChoice}
+			<p class="mt-2 text-red-500">{invalidChoice}</p>
+		{/if}
+	</div>
 </div>
 
 <style>
-	*	{
+	* {
 		flex-shrink: 0;
 	}
 
 	.middle-sub-container {
 		flex: 3 1 0%;
 	}
-
 </style>

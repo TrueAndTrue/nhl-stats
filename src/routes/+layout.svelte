@@ -10,7 +10,7 @@
 		<slot />
 	</main>
 
-	<footer class="text-sm text-white-950">
+	<footer class="text-white-950 text-sm">
 		<p>NHL owns their rights and stuff</p>
 	</footer>
 </div>
