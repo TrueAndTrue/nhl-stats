@@ -150,7 +150,7 @@
 					{#if Object.keys(player1).length > 0}
 						{player1.first_name} {player1.last_name}
 					{:else}
-						Player 1
+						Skater
 					{/if}
 				</h2>
 				<div class="h-[23vh] w-[12vw]">
@@ -206,7 +206,7 @@
 					{#if Object.keys(player2).length > 0}
 						{player2.first_name} {player2.last_name}
 					{:else}
-						Player 2
+						Goalie
 					{/if}
 				</h2>
 				<div class="h-[23vh] w-[12vw]">
@@ -251,7 +251,7 @@
 		<div class="align-start h-full justify-around">
 			<div class="flex w-full flex-col font-medium">
 				<div>
-					<h2 class="mb-4 text-center text-2xl font-bold text-gray-100">Stats</h2>
+					<h2 class="mb-4 text-center text-2xl font-bold text-gray-100">Skater Stats On Goalie</h2>
 				</div>
 				<div class="flex justify-around">
 					{#if Object.keys(playerStats).length > 0}
@@ -263,7 +263,7 @@
 									<div class="font-extrabold">
 										{statMapping[stat]}
 									</div>
-									<div class="font-medium">
+									<div class="font-medium text-center">
 										{playerStats[stat]}
 									</div>
 								{/if}
