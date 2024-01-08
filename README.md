@@ -31,9 +31,8 @@ The tools are intuitive and user-friendly:
 
 ## Installation and Setup
 
-- Clone the repo
+Clone the repo, then run:
 
-- Run:
 ```sh
 npm install
 ```
