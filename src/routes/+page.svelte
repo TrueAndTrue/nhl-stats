@@ -138,7 +138,6 @@
 			<p>
 				A web app for comparing NHL players. Report any bugs on the GitHub repo linked at the top
 				right. <br />
-				*shot numbers may be off due to NHL API issues
 			</p>
 		</section>
 
@@ -166,7 +165,7 @@
           <del>Fix the player lookup dropdown</del>
         </li>
         <li>
-          <h6>Refetch data from NHL API when a more concrete API is found</h6>
+          <h6>Refetch data from NHL API</h6>
         </li>
         <li>
           <h6>Add support for Skater vs Skater on versus tool</h6>

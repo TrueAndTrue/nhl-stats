@@ -5,7 +5,7 @@ Welcome to **Advanced NHL Stats** - the ultimate web application for hockey anal
 ## Features
 
 - **Comparison Tool**: Dive into metrics and compare NHL players to discover who truly dominates the ice.
-- **Versus Tool**: Engage in head-to-head match-ups between a Skater and a Goalie, unraveling historical performance insights. Watch this space for the upcoming Skater vs. Skater feature!
+- **Versus Tool**: Engage in head-to-head match-ups between a Skater and a Goalie, unraveling historical performance insights. Upcoming Skater vs. Skater feature!
 
 ## Quick Links
 
