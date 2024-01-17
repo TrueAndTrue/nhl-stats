@@ -17,10 +17,10 @@
 							<a href="/">Home</a>
 					</li>
 					<li class="{($page.url.pathname === '/comparison') ? 'active' : ''}">
-							<a href="/comparison">Comparison Tool</a>
+							<a href="/comparison">Comparison</a>
 					</li>
 					<li class="{($page.url.pathname === '/versus') ? 'active' : ''}">
-							<a href="/versus">Versus Tool</a>
+							<a href="/versus">Versus</a>
 					</li>
 			</ul>
 	</nav>
@@ -38,7 +38,7 @@
 			justify-content: space-between;
 			align-items: center;
 			padding: 1rem;
-			background-color: #1a1a1a; /* Preserving original color */
+			background-color: #121212; /* Preserving original color */
 			color: #fff;
 			font-family: 'Roboto', sans-serif;
 	}
@@ -54,6 +54,12 @@
 			transform: scale(1.1);
 	}
 
+	.nav {
+		background-color: rgb(58, 58, 58);
+		border-radius: 34px;
+		padding: 1rem 1rem;
+	}
+
 	.nav .menu {
 			list-style: none;
 			display: flex;
@@ -64,28 +70,19 @@
 			color: #f0f0f0;
 			text-decoration: none;
 			padding: 0.5rem 1rem;
-			border-radius: 0.5rem;
+			border-radius: 34px;
 			transition: background-color 0.3s ease;
 	}
 
 	.nav .menu li a:hover {
-			background-color: rgba(255, 255, 255, 0.1); /* Subtle hover and active background */
+			background-color: rgba(255, 255, 255, 0.2); /* Subtle hover and active background */
 	}
 
 	.nav .menu li.active a {
 			font-weight: 700;
 			position: relative;
-	}
+			background-color: rgba(255, 255, 255, 0.2);
 
-	.nav .menu li.active a::after {
-			content: '';
-			position: absolute;
-			bottom: -0.25rem;
-			left: 0;
-			right: 0;
-			height: 3px;
-			background-color: white; /* A bright color for the active indicator */
-			border-radius: 1.5px;
 	}
 
 	@media (max-width: 600px) {

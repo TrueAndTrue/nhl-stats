@@ -15,7 +15,7 @@
 	</main>
 
 	<footer class="text-white-950 text-sm">
-		<p>NHL owns their rights and stuff</p>
+		<p>Statistical Data provided by the National Hockey League (NHL). All rights reserved. This website is not affiliated with, endorsed by, or sponsored by the NHL.</p>
 	</footer>
 </div>
 
@@ -39,6 +39,7 @@
 		justify-content: center;
 		align-items: center;
 		padding: 12px;
+		margin-top: 2%;
 		color: white;
 	}
 

@@ -38,18 +38,14 @@
 			.home-header {
 				padding: 3rem;
 				text-align: center;
-				background: linear-gradient(to bottom, #232526, #414345);
+				background: 121212;
 				margin-bottom: 2rem;
 				transition: background 0.3s ease;
 			}
 
-			.home-header:hover {
-				background: linear-gradient(to bottom, #414345, #232526);
-			}
-
 			h1 {
 				font-family: var(--header-font);
-				font-size: 4rem;
+				font-size: 5rem;
 				color: var(--accent-color);
 				transition: text-shadow 0.3s ease;
 			}
@@ -60,18 +56,6 @@
 					0 0 2px var(--accent-color),
 					0 0 2px var(--accent-color),
 					0 0 7px var(--accent-color);
-			}
-
-			.sub-header {
-				font-size: 1.5rem;
-				color: var(--accent-color);
-				margin-top: 1rem;
-				text-shadow: var(--text-glow);
-				transition: color 0.3s ease;
-			}
-
-			.sub-header:hover {
-				color: var(--secondary-color);
 			}
 
 			section {
@@ -101,7 +85,7 @@
 				text-shadow: var(--text-glow);
 			}
 
-			p {
+			section p {
 				font-size: 1.25rem;
 				color: var(--secondary-color);
 				margin-top: 1rem;
@@ -119,43 +103,40 @@
 				h1 {
 					font-size: 3rem;
 				}
-
-				.sub-header,
-				p {
-					font-size: 1.1rem;
-				}
 			}
 		</style>
 	</head>
 	<body>
 		<header class="home-header">
-			<h1>Advanced NHL Stats</h1>
-			<p class="sub-header">For the nerds 🤓</p>
+			<h1>Dive Deeper with <br>Next-Gen NHL Analytics.</h1>
 		</header>
 
 		<section>
 			<h2>About</h2>
 			<p>
-				A web app for comparing NHL players. Report any bugs on the GitHub repo linked at the top
-				right. <br />
+				A web app for comparing NHL players. Report any bugs on the GitHub repo linked at the top-right. <br />
 			</p>
 		</section>
 
-		<section>
-			<h2>Comparison Tool</h2>
-			<p>
-				This tool is for comparing two players stats from any position and any point in time. Want
-				to compare a player from 1919 to a player in 2023? No problem.
-			</p>
-		</section>
+		<a href="/comparison">
+			<section>
+				<h2>Comparison Tool</h2>
+				<p>
+					This tool is for comparing two players stats from any position and any point in time. Want
+					to compare a player from 1919 to a player in 2023? No problem.
+				</p>
+			</section>
+		</a>
 
-		<section>
-			<h2>Versus Tool</h2>
-			<p>
-				This tool is meant for pitting players against each other. Want to know how many times
-				Gretzky scored on Roy? This is the tool for you.
-			</p>
-		</section>
+		<a href="/versus">
+			<section>
+				<h2>Versus Tool</h2>
+				<p>
+					This tool is meant for pitting players against each other. Want to know how many times
+					Gretzky scored on Roy? This is the tool for you.
+				</p>
+			</section>
+		</a>
 
     <section>
 			<h2>TODO</h2>
@@ -172,7 +153,5 @@
         </li>
       </ul>
 		</section>
-
-		<footer class="home-footer">&copy; 2024 Advanced NHL Stats. All rights unreserved.</footer>
 	</body>
 </html>
