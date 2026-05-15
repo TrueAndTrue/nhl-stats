@@ -1,37 +1,43 @@
-/** @type {import('tailwindcss').Config}*/
+/** @type {import('tailwindcss').Config} */
 const config = {
-	content: [
-		'./src/**/*.{html,js,svelte,ts}',
-		'./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'
-	],
-
-	plugins: [require('flowbite/plugin')],
-
-	darkMode: 'class',
+	content: ['./src/**/*.{html,js,svelte,ts}'],
 
 	theme: {
 		extend: {
 			colors: {
-				// flowbite-svelte
-				primary: {
-					50: '#FFF5F2',
-					100: '#FFF1EE',
-					200: '#FFE4DE',
-					300: '#FFD5CC',
-					400: '#FFBCAD',
-					500: '#FE795D',
-					600: '#EF562F',
-					700: '#EB4F27',
-					800: '#CC4522',
-					900: '#A5371B'
-				}
+				// surfaces
+				bg: '#0b0e14',
+				bgDeep: '#070910',
+				panel: '#11151d',
+				panel2: '#161b25',
+				panel3: '#1c2230',
+				// hairlines
+				line: '#1a2030',
+				lineSoft: '#13192340',
+				lineHard: '#222a3a',
+				// ink
+				ink: '#f4f5f7',
+				ink2: '#cfd3da',
+				dim: '#7c8595',
+				dim2: '#a4abb8',
+				faint: '#4a5160',
+				// accents
+				red: '#ec3a3a',
+				redDim: 'rgba(236,58,58,0.15)',
+				redGlow: 'rgba(236,58,58,0.06)',
+				ice: '#6dc9ff',
+				iceDim: 'rgba(109,201,255,0.15)',
+				warn: '#f3c969',
+				ok: '#8de2a8'
 			},
-			scale: {
-				101: '1.01',
-				103: '1.03'
+			fontFamily: {
+				display: ['Antonio', 'sans-serif'],
+				body: ['Geist', 'system-ui', 'sans-serif'],
+				mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
 			}
 		}
-	}
+	},
+	plugins: []
 };
 
 module.exports = config;
