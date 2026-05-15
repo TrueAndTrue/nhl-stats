@@ -1,6 +1,9 @@
 {
 	"name": "nhl-stats-advanced-client",
 	"version": "0.0.1",
+	"engines": {
+		"node": "22.x"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
