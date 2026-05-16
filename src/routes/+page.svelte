@@ -261,10 +261,7 @@
 			{#each leaders.slice(0, 7) as p, i (p.id)}
 				<div class="grid items-center gap-3 px-7 py-3" style="grid-template-columns: 24px 1fr auto; border-top: 1px solid #13192340;">
 					<span class="font-mono text-[11px] text-dim">{i + 1}</span>
-					<div>
-						<a href={`/player/${p.id}`} class="text-[13px] text-ink hover:underline">{p.first_name?.[0]}. {p.last_name}</a>
-						<div class="mt-[2px] font-mono text-[10px] text-dim">{p.team}</div>
-					</div>
+					<a href={`/player/${p.id}`} class="text-[13px] text-ink hover:underline">{p.first_name?.[0]}. {p.last_name}</a>
 					<span class="tnum font-display text-[26px] tracking-[-0.5px] text-ink">{p.goals}</span>
 				</div>
 			{/each}
