@@ -1,0 +1,6 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <!-- Chart axes: L-shape, neutral mid-gray that reads on both dark + light tab backgrounds -->
+  <path d="M 5 4 L 5 27 L 28 27" stroke="#8a8f99" stroke-width="1.5" stroke-linecap="square" />
+  <!-- Hockey stick: flat blade then up the shaft (the "hockey stick growth" line) -->
+  <path d="M 8 24 L 15 24 Q 17.5 24 18.5 21.5 L 25 7" stroke="#ec3a3a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
