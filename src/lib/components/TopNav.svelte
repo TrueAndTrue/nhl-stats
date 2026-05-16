@@ -4,7 +4,6 @@
 	import { goto } from '$app/navigation';
 	import { onMount, onDestroy } from 'svelte';
 	export let active: 'home' | 'players' | 'compare' | 'versus' | 'games' | 'records' | 'rink' | 'era' = 'home';
-	export let liveCount = 4;
 
 	const items = [
 		{ id: 'home', label: 'Home', href: '/' },
@@ -134,8 +133,4 @@
 		{/if}
 	</div>
 
-	<div class="flex items-center gap-2 font-mono text-[10px] tracking-[0.5px] text-dim">
-		<span class="live-pulse h-[6px] w-[6px] rounded-full bg-ok" style="box-shadow:0 0 10px #8de2a8"></span>
-		{liveCount} LIVE
-	</div>
 </div>

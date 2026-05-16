@@ -21,7 +21,6 @@
 	$: tonight = data?.landing?.tonight ?? [];
 	$: tonightFallback = data?.landing?.tonight_fallback ?? false;
 	$: tonightFallbackDate = data?.landing?.tonight_fallback_date as string | null;
-	$: liveCount = tonight.filter((g: any) => g.state === 'LIVE').length;
 	$: leaders = data?.landing?.leaders ?? [];
 	$: ledger = (data?.landing?.ledger ?? []).filter(Boolean);
 	$: currentSeasonLabel = data?.landing?.current_season_label ?? '';
@@ -76,7 +75,7 @@
 	<title>ANHLS · Advanced NHL Stats</title>
 </svelte:head>
 
-<TopNav active="home" liveCount={liveCount} />
+<TopNav active="home" />
 
 <!-- HERO -->
 <div class="relative overflow-hidden border-b border-line">
