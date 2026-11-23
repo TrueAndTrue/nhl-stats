@@ -1,4 +1,4 @@
-import { api, endpoints } from '$lib/api';
+import { api, endpoints } from '#lib/api.ts';
 import type { PageLoad } from './$types';
 
 export const load: PageLoad = async () => {
