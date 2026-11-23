@@ -1,4 +1,4 @@
-import { dev } from '$app/environment';
+import { dev } from '$app/env';
 
 const PROD_BASE = import.meta.env.VITE_NHL_API_BASE_URL ?? 'https://nhl-api.herokuapp.com';
 const DEV_BASE = 'http://127.0.0.1:8000';

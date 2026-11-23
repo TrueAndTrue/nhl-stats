@@ -1,11 +1,11 @@
 <script lang="ts">
-	import TopNav from '$lib/components/TopNav.svelte';
-	import StatusBar from '$lib/components/StatusBar.svelte';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
-	import Rink from '$lib/components/Rink.svelte';
-	import StatNum from '$lib/components/StatNum.svelte';
-	import Tag from '$lib/components/Tag.svelte';
-	import Cta from '$lib/components/Cta.svelte';
+	import TopNav from '#lib/components/TopNav.svelte';
+	import StatusBar from '#lib/components/StatusBar.svelte';
+	import Eyebrow from '#lib/components/Eyebrow.svelte';
+	import Rink from '#lib/components/Rink.svelte';
+	import StatNum from '#lib/components/StatNum.svelte';
+	import Tag from '#lib/components/Tag.svelte';
+	import Cta from '#lib/components/Cta.svelte';
 
 	export let data: { landing: any | null; error?: string };
 

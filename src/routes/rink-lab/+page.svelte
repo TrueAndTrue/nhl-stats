@@ -1,11 +1,11 @@
 <script lang="ts">
-	import TopNav from '$lib/components/TopNav.svelte';
-	import StatusBar from '$lib/components/StatusBar.svelte';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
-	import Rink from '$lib/components/Rink.svelte';
-	import StatNum from '$lib/components/StatNum.svelte';
-	import Panel from '$lib/components/Panel.svelte';
-	import { api, endpoints } from '$lib/api';
+	import TopNav from '#lib/components/TopNav.svelte';
+	import StatusBar from '#lib/components/StatusBar.svelte';
+	import Eyebrow from '#lib/components/Eyebrow.svelte';
+	import Rink from '#lib/components/Rink.svelte';
+	import StatNum from '#lib/components/StatNum.svelte';
+	import Panel from '#lib/components/Panel.svelte';
+	import { api, endpoints } from '#lib/api.ts';
 
 	export let data: { bins: any; initialBin: any };
 

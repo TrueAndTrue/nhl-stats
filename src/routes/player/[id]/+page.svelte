@@ -1,12 +1,12 @@
 <script lang="ts">
-	import TopNav from '$lib/components/TopNav.svelte';
-	import StatusBar from '$lib/components/StatusBar.svelte';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
-	import Rink from '$lib/components/Rink.svelte';
-	import StatNum from '$lib/components/StatNum.svelte';
-	import KPI from '$lib/components/KPI.svelte';
-	import Tag from '$lib/components/Tag.svelte';
-	import Pill from '$lib/components/Pill.svelte';
+	import TopNav from '#lib/components/TopNav.svelte';
+	import StatusBar from '#lib/components/StatusBar.svelte';
+	import Eyebrow from '#lib/components/Eyebrow.svelte';
+	import Rink from '#lib/components/Rink.svelte';
+	import StatNum from '#lib/components/StatNum.svelte';
+	import KPI from '#lib/components/KPI.svelte';
+	import Tag from '#lib/components/Tag.svelte';
+	import Pill from '#lib/components/Pill.svelte';
 
 	export let data: { player: any };
 	$: p = data.player;

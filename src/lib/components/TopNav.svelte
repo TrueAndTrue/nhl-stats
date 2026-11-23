@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Mark from './Mark.svelte';
-	import { api, endpoints } from '$lib/api';
+	import { api, endpoints } from '#lib/api.ts';
 	import { goto } from '$app/navigation';
 	import { onMount, onDestroy } from 'svelte';
 	export let active: 'home' | 'players' | 'compare' | 'versus' | 'games' | 'records' | 'rink' | 'era' = 'home';

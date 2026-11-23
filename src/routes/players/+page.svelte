@@ -1,10 +1,14 @@
 <script lang="ts">
-	import TopNav from '$lib/components/TopNav.svelte';
-	import StatusBar from '$lib/components/StatusBar.svelte';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
-	import Tag from '$lib/components/Tag.svelte';
+	import TopNav from '#lib/components/TopNav.svelte';
+	import StatusBar from '#lib/components/StatusBar.svelte';
+	import Eyebrow from '#lib/components/Eyebrow.svelte';
+	import Tag from '#lib/components/Tag.svelte';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page as appPage } from '$app/state';
+	import { toStore } from 'svelte/store';
+
+	// $app/stores was removed in SvelteKit 3. Wrap $app/state so the legacy $: blocks below stay reactive.
+	const page = toStore(() => ({ url: appPage.url }));
 
 	export let data: { directory: any };
 	$: dir = data.directory;
@@ -36,7 +40,7 @@
 	const fmt = (n: number) => n.toLocaleString('en-US');
 
 	function withParam(updates: Record<string, string | null>): string {
-		const p = new URLSearchParams($page.url.searchParams);
+		const p = new URLSearchParams($page.url.search);
 		for (const [k, v] of Object.entries(updates)) {
 			if (v === null || v === '') p.delete(k);
 			else p.set(k, v);
@@ -47,7 +51,7 @@
 	}
 
 	function setParam(updates: Record<string, string | null>) {
-		goto(`/players?${withParam(updates)}`, { keepFocus: true, noScroll: true });
+		goto(`/players?${withParam(updates)}`, { reset: false });
 	}
 
 	let qInput = filters?.q ?? '';

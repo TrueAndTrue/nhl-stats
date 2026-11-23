@@ -1,9 +1,9 @@
 <script lang="ts">
-	import TopNav from '$lib/components/TopNav.svelte';
-	import StatusBar from '$lib/components/StatusBar.svelte';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
-	import Rink from '$lib/components/Rink.svelte';
-	import Pill from '$lib/components/Pill.svelte';
+	import TopNav from '#lib/components/TopNav.svelte';
+	import StatusBar from '#lib/components/StatusBar.svelte';
+	import Eyebrow from '#lib/components/Eyebrow.svelte';
+	import Rink from '#lib/components/Rink.svelte';
+	import Pill from '#lib/components/Pill.svelte';
 
 	export let data: { eras: any };
 	$: e = data.eras;

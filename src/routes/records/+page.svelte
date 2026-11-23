@@ -1,11 +1,15 @@
 <script lang="ts">
-	import TopNav from '$lib/components/TopNav.svelte';
-	import StatusBar from '$lib/components/StatusBar.svelte';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
-	import Tag from '$lib/components/Tag.svelte';
-	import Panel from '$lib/components/Panel.svelte';
+	import TopNav from '#lib/components/TopNav.svelte';
+	import StatusBar from '#lib/components/StatusBar.svelte';
+	import Eyebrow from '#lib/components/Eyebrow.svelte';
+	import Tag from '#lib/components/Tag.svelte';
+	import Panel from '#lib/components/Panel.svelte';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
+	import { page as appPage } from '$app/state';
+	import { toStore } from 'svelte/store';
+
+	// $app/stores was removed in SvelteKit 3. Wrap $app/state so the legacy $: blocks below stay reactive.
+	const page = toStore(() => ({ url: appPage.url }));
 
 	export let data: { records: any; overview: any };
 	$: r = data.records;
@@ -38,7 +42,7 @@
 	];
 
 	function navTo(category: string, band: string) {
-		const params = new URLSearchParams($page.url.searchParams);
+		const params = new URLSearchParams($page.url.search);
 		params.set('category', category);
 		params.set('band', band);
 		goto(`/records?${params.toString()}`);

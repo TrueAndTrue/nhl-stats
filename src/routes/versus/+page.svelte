@@ -1,15 +1,19 @@
 <script lang="ts">
-	import TopNav from '$lib/components/TopNav.svelte';
-	import StatusBar from '$lib/components/StatusBar.svelte';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
-	import Rink from '$lib/components/Rink.svelte';
-	import KPI from '$lib/components/KPI.svelte';
-	import Tag from '$lib/components/Tag.svelte';
-	import Pill from '$lib/components/Pill.svelte';
-	import { api, endpoints } from '$lib/api';
+	import TopNav from '#lib/components/TopNav.svelte';
+	import StatusBar from '#lib/components/StatusBar.svelte';
+	import Eyebrow from '#lib/components/Eyebrow.svelte';
+	import Rink from '#lib/components/Rink.svelte';
+	import KPI from '#lib/components/KPI.svelte';
+	import Tag from '#lib/components/Tag.svelte';
+	import Pill from '#lib/components/Pill.svelte';
+	import { api, endpoints } from '#lib/api.ts';
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { browser } from '$app/environment';
+	import { page as appPage } from '$app/state';
+	import { toStore } from 'svelte/store';
+
+	// $app/stores was removed in SvelteKit 3. Wrap $app/state so the legacy $: blocks below stay reactive.
+	const page = toStore(() => ({ url: appPage.url }));
+	import { browser } from '$app/env';
 
 	let skaterId = 8471214; // Ovi
 	let goalieId = 8468685; // Lundqvist
@@ -29,10 +33,10 @@
 	$: if (goalieParam) goalieId = goalieParam;
 
 	function setGameType(v: 'all' | 'regular' | 'playoffs') {
-		const params = new URLSearchParams($page.url.searchParams);
+		const params = new URLSearchParams($page.url.search);
 		if (v === 'all') params.delete('game_type');
 		else params.set('game_type', v);
-		goto(`/versus?${params.toString()}`, { keepFocus: true, noScroll: true });
+		goto(`/versus?${params.toString()}`, { reset: false });
 	}
 
 	async function fetchVersus() {
